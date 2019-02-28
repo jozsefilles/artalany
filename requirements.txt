@@ -1,6 +1,7 @@
-__pycache__
-artalany.py
-pages.json
-requirements.txt
-templates
-venv
+Click==7.0
+Flask==1.0.2
+itsdangerous==1.1.0
+Jinja2==2.10
+MarkupSafe==1.1.1
+tinydb==3.12.2
+Werkzeug==0.14.1
