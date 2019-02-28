@@ -1,0 +1,6 @@
+__pycache__
+artalany.py
+pages.json
+requirements.txt
+templates
+venv
