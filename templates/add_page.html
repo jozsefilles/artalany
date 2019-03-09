@@ -6,12 +6,21 @@
 </head>
 
 <body>
-  <form action="/pages/" method="post">
-    <legend>Add a new page</legend>
-    <label>URL
-      <input type="text" name="url">
-    </label>
-  </form>
+  {% if message %}
+  <p>{{ message }}</p>
+  {% endif %}
+  <p>
+    <form action="/add_page" method="post">
+      <legend>Add a new page</legend>
+      <label>URL
+        <input type="text" name="url">
+      </label>
+      <label>XPath
+        <input type="text" name="xpath">
+      </label>
+      <button>Add</button>
+    </form>
+  </p>
 </body>
 
 </html>

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 
-from flask import Flask, request, abort
+from flask import Flask, request, abort, render_template
 from tinydb import TinyDB, Query
 from dataclasses import dataclass, asdict
 
@@ -22,6 +22,8 @@ def create_app(test_config=None):
     db = TinyDB('./pages.json')
 
 
+    # API
+
     @app.route('/pages/<int:page_id>')
     def get_page(page_id):
         page = db.get(doc_id=page_id)
@@ -36,6 +38,23 @@ def create_app(test_config=None):
         page = Page(request.form['url'], request.form['xpath'])
         page_id = db.insert(asdict(page))
         return str(page_id)
+
+
+    # view methods
+
+    @app.route('/add_page', methods=['GET', 'POST'])
+    def view_add_page():
+        if request.method == 'GET':
+            return render_template('add_page.html')
+        elif request.method == 'POST':
+            url = request.form['url']
+            xpath = request.form['xpath']
+            # TODO validate (not empty, etc.)
+
+            page = Page(url, xpath)
+            page_id = db.insert(asdict(page))
+            return render_template('add_page.html',
+                                   message=f'Page added with ID: {page_id}')
 
 
     return app
