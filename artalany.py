@@ -42,6 +42,17 @@ def create_app(test_config=None):
 
     # view methods
 
+    @app.route('/')
+    def index():
+        return render_template('index.html')
+
+
+    @app.route('/list_pages')
+    def view_list_pages():
+        pages = db.all()
+        return render_template('list_pages.html', pages=pages)
+
+
     @app.route('/add_page', methods=['GET', 'POST'])
     def view_add_page():
         if request.method == 'GET':

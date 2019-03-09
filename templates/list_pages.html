@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>List of all pages</title>
+</head>
+
+<body>
+  <main>
+    <table>
+      <thead>
+        <th>URL</th>
+        <th>XPath</th>
+      </thead>
+      <tbody>
+        {% for p in pages %}
+        <tr>
+          <td>{{ p.url }}</td>
+          <td>{{ p.xpath }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </main>
+  <nav>
+    <a href="/">Home</a>
+  </nav>
+</body>
+
+</html>
