@@ -9,12 +9,14 @@
   <main>
     <table>
       <thead>
+        <th>Name</th>
         <th>URL</th>
         <th>XPath</th>
       </thead>
       <tbody>
         {% for p in pages %}
         <tr>
+          <td>{{ p.name }}</td>
           <td>{{ p.url }}</td>
           <td>{{ p.xpath }}</td>
         </tr>

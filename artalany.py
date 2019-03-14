@@ -9,6 +9,7 @@ from dataclasses import dataclass, asdict
 
 @dataclass
 class Page:
+    name: str
     url: str
     xpath: str
 
@@ -35,7 +36,9 @@ def create_app(test_config=None):
 
     @app.route('/pages/', methods=['POST'])
     def post_page():
-        page = Page(request.form['url'], request.form['xpath'])
+        page = Page(request.form['name'],
+                    request.form['url'],
+                    request.form['xpath'])
         page_id = db.insert(asdict(page))
         return str(page_id)
 
@@ -58,11 +61,12 @@ def create_app(test_config=None):
         if request.method == 'GET':
             return render_template('add_page.html')
         elif request.method == 'POST':
+            name = request.form['name']
             url = request.form['url']
             xpath = request.form['xpath']
             # TODO validate (not empty, etc.)
 
-            page = Page(url, xpath)
+            page = Page(name, url, xpath)
             page_id = db.insert(asdict(page))
             return render_template('add_page.html',
                                    message=f'Page added with ID: {page_id}')
