@@ -72,4 +72,23 @@ def create_app(test_config=None):
                                    message=f'Page added with ID: {page_id}')
 
 
+    @app.route('/crawl_page')
+    def crawl_page():
+        page_id = request.args.get('page_id')
+        print(page_id)
+        if page_id is None:
+            abort(400)
+        try:
+            page_id = int(page_id)
+        except TypeError:
+            abort(400)
+
+        page = db.get(doc_id=page_id)
+        if page is None:
+            abort(404)
+        else:
+            # TODO run crawler for page
+            return render_template('crawl_page.html', page=page)
+
+
     return app

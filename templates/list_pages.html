@@ -12,6 +12,7 @@
         <th>Name</th>
         <th>URL</th>
         <th>XPath</th>
+        <th>Actions</th>
       </thead>
       <tbody>
         {% for p in pages %}
@@ -19,6 +20,7 @@
           <td>{{ p.name }}</td>
           <td>{{ p.url }}</td>
           <td>{{ p.xpath }}</td>
+          <td><a href="/crawl_page?page_id={{ p.doc_id }}">Crawl</a></td>
         </tr>
         {% endfor %}
       </tbody>
